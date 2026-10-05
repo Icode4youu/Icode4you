@@ -10,7 +10,7 @@ const projects = [
     label: 'Guidance engine',
     site: 'https://careerguide1.onrender.com/',
     tone: 'cyan',
-    image: '/careerguide.png',
+    image: 'careerguide.png',
     imageAlt: 'CareerGuide mobile landing page screenshot',
     description:
       'A career guidance platform that converts student skills assessments into course recommendations, progress tracking, counselor workflows, and portfolio evidence.',
@@ -24,7 +24,7 @@ const projects = [
     label: 'Realtime wall',
     site: 'https://campusspill.onrender.com/',
     tone: 'fuchsia',
-    image: '/campusspill.png',
+    image: 'campusspill.png',
     imageAlt: 'CampusSpill mobile feed screenshot',
     description:
       'An anonymous student network with realtime posting, Supabase-backed interactions, installable PWA behavior, and mobile-ready APK packaging.',
@@ -343,7 +343,7 @@ function ProjectScreenshot({ project }) {
         <i />
         Live mobile capture
       </span>
-      <img src={project.image} alt={project.imageAlt} draggable="false" />
+      <img src={`${import.meta.env.BASE_URL}${project.image}`} alt={project.imageAlt} draggable="false" />
       <span className="screenshot-bottom">
         <span>{project.code}</span>
         <em>Open system</em>

@@ -2,6 +2,8 @@
 
 Experimental React + Tailwind CSS portfolio featuring live deployments of CareerGuide and CampusSpill.
 
+**Live portfolio:** https://icode4youu.github.io/Icode4you/
+
 ## Featured projects
 
 - [CareerGuide](https://careerguide1.onrender.com/) — career guidance and skills assessment platform
