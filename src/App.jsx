@@ -567,13 +567,167 @@ function ModuleUniverse() {
   )
 }
 
+const TERMINAL_HELP = 'commands: whoami | projects | stack | socials | email | resume | open cg | open cs | clear | exit'
+
+function TerminalOverlay({ open, onClose }) {
+  const [lines, setLines] = useState([
+    'MD://SHELL v2026.1 — interactive mode',
+    'type "help" to list commands.',
+  ])
+  const [value, setValue] = useState('')
+  const bodyRef = useRef(null)
+  const inputRef = useRef(null)
+
+  useEffect(() => {
+    if (open) inputRef.current?.focus()
+  }, [open])
+
+  useEffect(() => {
+    bodyRef.current?.scrollTo({ top: bodyRef.current.scrollHeight })
+  }, [lines, open])
+
+  useEffect(() => {
+    if (!open) return undefined
+    const onKey = (event) => {
+      if (event.key === 'Escape') onClose()
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [open, onClose])
+
+  if (!open) return null
+
+  const execute = (raw) => {
+    const cmd = raw.trim()
+    if (!cmd) return
+    const [name, arg] = cmd.toLowerCase().split(/\s+/)
+    const out = []
+
+    switch (name) {
+      case 'help':
+        out.push(TERMINAL_HELP)
+        break
+      case 'whoami':
+        out.push('mark dulay danila — i build student-facing systems.')
+        break
+      case 'projects':
+        out.push(
+          'cg  careerguide   guidance engine — careerguide1.onrender.com',
+          'cs  campusspill   realtime wall   — campusspill.onrender.com',
+          'tip: "open cg" or "open cs" launches the live site',
+        )
+        break
+      case 'stack':
+        out.push('php · mysql · supabase · javascript · react · tailwind · pwa · android')
+        break
+      case 'socials':
+        out.push(
+          'github     github.com/Icode4youu',
+          'linkedin   linkedin.com/in/mark-dulay-danila-841870441',
+          'facebook   facebook.com/mrkdlydnl',
+          'instagram  instagram.com/mrkdlydnl4',
+        )
+        break
+      case 'email':
+        try {
+          navigator.clipboard.writeText(email)
+          out.push(`${email} — copied to clipboard`)
+        } catch {
+          out.push(email)
+        }
+        break
+      case 'resume':
+        window.open(`${import.meta.env.BASE_URL}resume.pdf`, '_blank')
+        out.push('opening resume.pdf…')
+        break
+      case 'open':
+        if (arg === 'cg' || arg === 'careerguide') {
+          window.open(projects[0].site, '_blank')
+          out.push('launching careerguide…')
+        } else if (arg === 'cs' || arg === 'campusspill') {
+          window.open(projects[1].site, '_blank')
+          out.push('launching campusspill…')
+        } else {
+          out.push('usage: open cg | open cs')
+        }
+        break
+      case 'clear':
+        setLines([])
+        setValue('')
+        return
+      case 'exit':
+      case 'close':
+        onClose()
+        return
+      default:
+        out.push(`command not found: ${name} — type "help"`)
+    }
+
+    setLines((prev) => [...prev, `mark@danila:~$ ${raw}`, ...out])
+    setValue('')
+  }
+
+  return (
+    <div className="terminal-overlay" role="dialog" aria-modal="true" aria-label="Interactive terminal" onClick={onClose}>
+      <div className="terminal-shell" onClick={(event) => event.stopPropagation()}>
+        <div className="terminal-bar">
+          <span className="term-dot" />
+          <span className="term-dot" />
+          <span className="term-dot" />
+          <span className="terminal-title">md://tty — mark@danila</span>
+          <button type="button" onClick={onClose} className="terminal-close">
+            esc
+          </button>
+        </div>
+        <div ref={bodyRef} className="terminal-body" onClick={() => inputRef.current?.focus()}>
+          {lines.map((line, index) => (
+            <p key={index} className={line.startsWith('mark@danila') ? 'term-echo' : ''}>
+              {line}
+            </p>
+          ))}
+          <form
+            className="terminal-prompt"
+            onSubmit={(event) => {
+              event.preventDefault()
+              execute(value)
+            }}
+          >
+            <span>mark@danila:~$</span>
+            <input
+              ref={inputRef}
+              value={value}
+              onChange={(event) => setValue(event.target.value)}
+              autoComplete="off"
+              autoCapitalize="off"
+              spellCheck="false"
+              aria-label="Terminal command"
+            />
+          </form>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export default function App() {
   const glowRef = useCursorGlow()
   const telemetryRef = useMouseTelemetry()
   const progress = useScrollProgress()
   const activeSection = useSectionSpy()
   const [copied, setCopied] = useState(false)
+  const [terminalOpen, setTerminalOpen] = useState(false)
   useReveal()
+
+  useEffect(() => {
+    const onKey = (event) => {
+      if (event.key === '`' && document.activeElement?.tagName !== 'INPUT') {
+        event.preventDefault()
+        setTerminalOpen((open) => !open)
+      }
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [])
 
   const copyEmail = async () => {
     try {
@@ -649,6 +803,9 @@ export default function App() {
                 <DownloadIcon />
                 Download CV
               </a>
+              <button type="button" className="ghost-link" onClick={() => setTerminalOpen(true)}>
+                $ open tty
+              </button>
             </div>
           </div>
 
@@ -820,9 +977,11 @@ export default function App() {
           <a href="#profile">Profile</a>
           <a href="#contact">Signal</a>
         </nav>
-        <span>React / Tailwind / Interactive systems</span>
+        <span>React / Tailwind / press ` for tty</span>
         <a href="#top" className="footer-top">Back to top</a>
       </footer>
+
+      <TerminalOverlay key={String(terminalOpen)} open={terminalOpen} onClose={() => setTerminalOpen(false)} />
     </div>
   )
 }
