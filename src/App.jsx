@@ -567,9 +567,123 @@ function ModuleUniverse() {
   )
 }
 
-const TERMINAL_HELP = 'commands: whoami | projects | stack | socials | email | resume | open cg | open cs | clear | exit'
+const TERMINAL_HELP = 'commands: whoami | projects | stack | socials | email | resume | open cg/cs | ls | ping | date | clear | exit — plus a few secrets…'
 
-function TerminalOverlay({ open, onClose }) {
+const BOOT_LINES = [
+  'MD://BIOS v2026.1 — memory check ............ ok',
+  'mounting /portfolio ........................ ok',
+  'loading modules [careerguide] [campusspill]  ok',
+  'establishing signal ........................ 98%',
+  'starting interface ......................... ok',
+  'welcome, guest.',
+]
+
+function BootSequence({ onDone }) {
+  const [count, setCount] = useState(0)
+  const [leaving, setLeaving] = useState(false)
+
+  useEffect(() => {
+    const finish = () => {
+      sessionStorage.setItem('md-booted', '1')
+      setLeaving(true)
+      setTimeout(onDone, 320)
+    }
+
+    const id = setInterval(() => {
+      setCount((prev) => {
+        if (prev + 1 >= BOOT_LINES.length) {
+          clearInterval(id)
+          setTimeout(finish, 450)
+        }
+        return prev + 1
+      })
+    }, 230)
+
+    window.addEventListener('keydown', finish)
+    window.addEventListener('pointerdown', finish)
+    return () => {
+      clearInterval(id)
+      window.removeEventListener('keydown', finish)
+      window.removeEventListener('pointerdown', finish)
+    }
+  }, [onDone])
+
+  return (
+    <div className={`boot-overlay ${leaving ? 'is-leaving' : ''}`}>
+      <div className="boot-box">
+        {BOOT_LINES.slice(0, count).map((line) => (
+          <p key={line}>{line}</p>
+        ))}
+        <span className="boot-cursor" />
+      </div>
+      <span className="boot-skip">press any key to skip</span>
+    </div>
+  )
+}
+
+const MATRIX_GLYPHS = 'アイウエオカキクケコサシスセソタチツテトナニヌネノ0123456789MD$#<>+='
+const KONAMI = ['arrowup', 'arrowup', 'arrowdown', 'arrowdown', 'arrowleft', 'arrowright', 'arrowleft', 'arrowright', 'b', 'a']
+
+function MatrixRain({ onClose }) {
+  const canvasRef = useRef(null)
+
+  useEffect(() => {
+    const canvas = canvasRef.current
+    const context = canvas.getContext('2d')
+    const ratio = Math.min(window.devicePixelRatio || 1, 2)
+
+    const resize = () => {
+      canvas.width = window.innerWidth * ratio
+      canvas.height = window.innerHeight * ratio
+    }
+    resize()
+
+    const size = 16 * ratio
+    const columns = Math.floor(canvas.width / size)
+    const rows = Math.ceil(canvas.height / size)
+    const drops = Array.from({ length: columns }, () => Math.floor(Math.random() * rows * 2) - rows)
+
+    const tick = setInterval(() => {
+      context.fillStyle = 'rgba(3, 3, 9, 0.1)'
+      context.fillRect(0, 0, canvas.width, canvas.height)
+      context.font = `${size}px monospace`
+
+      drops.forEach((y, index) => {
+        const glyph = MATRIX_GLYPHS[Math.floor(Math.random() * MATRIX_GLYPHS.length)]
+        context.fillStyle = Math.random() > 0.9 ? '#67e8f9' : '#4ade80'
+        context.fillText(glyph, index * size, y * size)
+
+        if (y * size > canvas.height && Math.random() > 0.975) {
+          drops[index] = 0
+        } else {
+          drops[index] = y + 1
+        }
+      })
+    }, 55)
+
+    const autoClose = setTimeout(onClose, 12000)
+    window.addEventListener('keydown', onClose)
+    window.addEventListener('pointerdown', onClose)
+    window.addEventListener('resize', resize)
+
+    return () => {
+      clearInterval(tick)
+      clearTimeout(autoClose)
+      window.removeEventListener('keydown', onClose)
+      window.removeEventListener('pointerdown', onClose)
+      window.removeEventListener('resize', resize)
+    }
+  }, [onClose])
+
+  return (
+    <div className="matrix-overlay" aria-hidden="true">
+      <canvas ref={canvasRef} />
+      <span className="matrix-caption">matrix mode — press any key to exit</span>
+    </div>
+  )
+}
+
+function TerminalOverlay({ open, onClose, onMatrix }) {
   const [lines, setLines] = useState([
     'MD://SHELL v2026.1 — interactive mode',
     'type "help" to list commands.',
@@ -651,6 +765,43 @@ function TerminalOverlay({ open, onClose }) {
           out.push('usage: open cg | open cs')
         }
         break
+      case 'ls':
+      case 'dir':
+        out.push('modules/  stack/  profile/  process/  signal/')
+        break
+      case 'ping':
+        out.push('pong — signal at 98%')
+        break
+      case 'date':
+        out.push(new Date().toString())
+        break
+      case 'sudo':
+        if (cmd.includes('hire')) {
+          out.push('access granted — hiring pipeline initiated.', 'confirm via markdulaydanila@gmail.com')
+        } else {
+          out.push('sudo: permission denied — this shell is read-only')
+        }
+        break
+      case 'hire':
+        out.push('flattered. type "email" to grab my contact.')
+        break
+      case 'matrix':
+        out.push('entering the matrix…')
+        setLines((prev) => [...prev, `mark@danila:~$ ${raw}`, ...out])
+        setValue('')
+        setTimeout(() => {
+          onClose()
+          onMatrix()
+        }, 600)
+        return
+      case 'hello':
+      case 'hi':
+      case 'kamusta':
+        out.push('hello! type "help" if you get lost.')
+        break
+      case '42':
+        out.push('the answer.')
+        break
       case 'clear':
         setLines([])
         setValue('')
@@ -716,7 +867,23 @@ export default function App() {
   const activeSection = useSectionSpy()
   const [copied, setCopied] = useState(false)
   const [terminalOpen, setTerminalOpen] = useState(false)
+  const [matrixMode, setMatrixMode] = useState(false)
+  const [booted, setBooted] = useState(() => sessionStorage.getItem('md-booted') === '1')
   useReveal()
+
+  useEffect(() => {
+    let index = 0
+    const onKey = (event) => {
+      const key = event.key.length === 1 ? event.key.toLowerCase() : event.key.toLowerCase()
+      index = key === KONAMI[index] ? index + 1 : key === KONAMI[0] ? 1 : 0
+      if (index === KONAMI.length) {
+        setMatrixMode(true)
+        index = 0
+      }
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [])
 
   useEffect(() => {
     const onKey = (event) => {
@@ -981,7 +1148,14 @@ export default function App() {
         <a href="#top" className="footer-top">Back to top</a>
       </footer>
 
-      <TerminalOverlay key={String(terminalOpen)} open={terminalOpen} onClose={() => setTerminalOpen(false)} />
+      <TerminalOverlay
+        key={String(terminalOpen)}
+        open={terminalOpen}
+        onClose={() => setTerminalOpen(false)}
+        onMatrix={() => setMatrixMode(true)}
+      />
+      {matrixMode && <MatrixRain onClose={() => setMatrixMode(false)} />}
+      {!booted && <BootSequence onDone={() => setBooted(true)} />}
     </div>
   )
 }
