@@ -514,6 +514,13 @@
   height: 11rem;
   place-items: center;
   perspective: 900px;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+
+.cube-scene:active {
+  cursor: grabbing;
 }
 
 .tech-cube {
@@ -521,7 +528,6 @@
   width: 6.5rem;
   height: 6.5rem;
   transform-style: preserve-3d;
-  animation: cube-spin 16s linear infinite;
 }
 
 .cube-face {
@@ -1527,15 +1533,6 @@
 @keyframes panel-shine {
   45%, 100% {
     transform: translateX(110%);
-  }
-}
-
-@keyframes cube-spin {
-  from {
-    transform: rotateX(-18deg) rotateY(0deg);
-  }
-  to {
-    transform: rotateX(-18deg) rotateY(360deg);
   }
 }
 

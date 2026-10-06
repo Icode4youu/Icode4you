@@ -429,9 +429,67 @@ function GlitchText({ text, className = '' }) {
 }
 
 function TechCube() {
+  const cubeRef = useRef(null)
+  const motion = useRef({ rx: -18, ry: 0, vx: 0, vy: 0, dragging: false, lastX: 0, lastY: 0 })
+
+  useEffect(() => {
+    const cube = cubeRef.current
+    const m = motion.current
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    let frame = 0
+
+    const loop = () => {
+      if (!m.dragging) {
+        m.ry += m.vy + (reduced ? 0 : 0.22)
+        m.rx += m.vx
+        m.vx *= 0.94
+        m.vy *= 0.94
+      }
+      cube.style.transform = `rotateX(${m.rx}deg) rotateY(${m.ry}deg)`
+      frame = requestAnimationFrame(loop)
+    }
+    frame = requestAnimationFrame(loop)
+    return () => cancelAnimationFrame(frame)
+  }, [])
+
+  const onPointerDown = (event) => {
+    const m = motion.current
+    m.dragging = true
+    m.vx = 0
+    m.vy = 0
+    m.lastX = event.clientX
+    m.lastY = event.clientY
+    event.currentTarget.setPointerCapture(event.pointerId)
+  }
+
+  const onPointerMove = (event) => {
+    const m = motion.current
+    if (!m.dragging) return
+    const dx = event.clientX - m.lastX
+    const dy = event.clientY - m.lastY
+    m.ry += dx * 0.5
+    m.rx -= dy * 0.5
+    m.vx = -dy * 0.5
+    m.vy = dx * 0.5
+    m.lastX = event.clientX
+    m.lastY = event.clientY
+  }
+
+  const stopDragging = () => {
+    motion.current.dragging = false
+  }
+
   return (
-    <div className="cube-scene" aria-hidden="true">
-      <div className="tech-cube">
+    <div
+      className="cube-scene"
+      role="img"
+      aria-label="Draggable 3D cube showing the tech stack"
+      onPointerDown={onPointerDown}
+      onPointerMove={onPointerMove}
+      onPointerUp={stopDragging}
+      onPointerCancel={stopDragging}
+    >
+      <div ref={cubeRef} className="tech-cube">
         {stackFaces.map((face, index) => (
           <div key={face} className={`cube-face cube-face-${index}`}>
             {face}
@@ -567,33 +625,12 @@ function ModuleUniverse() {
   )
 }
 
-const TERMINAL_HELP = 'commands: whoami | projects | stack | socials | email | resume | open cg/cs | ls | ping | date | hack | sec101 | clear | exit — plus a few secrets…'
+const TERMINAL_HELP = 'commands: whoami | projects | stack | socials | email | resume | open cg/cs | ls | ping | date | clear | exit — plus a few secrets…'
 
 const KNOWN_COMMANDS = [
   'help', 'whoami', 'projects', 'stack', 'socials', 'email', 'resume', 'open',
   'ls', 'dir', 'ping', 'date', 'sudo', 'hire', 'matrix', 'hello', 'hi', 'kamusta',
-  'hack', 'sec101', 'nmap', 'decrypt', 'ssh', 'trace', 'root',
   '42', 'clear', 'exit', 'close',
-]
-
-const HACK_SEQUENCE = [
-  '> initializing exploit modules…',
-  '> scanning target: icode4youu.github.io',
-  '> bypassing firewall [██████████] 100%',
-  '> injecting payload… done',
-  '> accessing mainframe… ACCESS GRANTED',
-  '',
-  '> just kidding — real security work is patience, documentation, and permission.',
-  '> want actual tips? type "sec101"',
-]
-
-const SECURITY_TIPS = [
-  'security 101 — the legal kind:',
-  '  - use unique passwords + a password manager',
-  '  - turn on 2FA everywhere it exists',
-  '  - update your software; most breaches hit old versions',
-  '  - check URLs before typing credentials (phishing)',
-  '  - never paste terminal commands you do not understand',
 ]
 
 function editDistance(a, b) {
@@ -753,12 +790,6 @@ function TerminalOverlay({ open, onClose, onMatrix }) {
 
   if (!open) return null
 
-  const streamOut = (items, delay = 340) => {
-    items.forEach((item, index) => {
-      setTimeout(() => setLines((prev) => [...prev, item]), delay * (index + 1))
-    })
-  }
-
   const execute = (raw) => {
     const cmd = raw.trim()
     if (!cmd) return
@@ -826,58 +857,9 @@ function TerminalOverlay({ open, onClose, onMatrix }) {
       case 'sudo':
         if (cmd.includes('hire')) {
           out.push('access granted — hiring pipeline initiated.', 'confirm via markdulaydanila@gmail.com')
-        } else if (cmd.includes('rm')) {
-          out.push('whoa — nothing here worth deleting anyway.')
         } else {
           out.push('sudo: permission denied — this shell is read-only')
         }
-        break
-      case 'hack':
-        setLines((prev) => [...prev, `mark@danila:~$ ${raw}`])
-        streamOut(HACK_SEQUENCE)
-        setValue('')
-        return
-      case 'sec101':
-      case 'security':
-        out.push(...SECURITY_TIPS)
-        break
-      case 'nmap':
-        out.push(
-          'scanning icode4youu.github.io …',
-          'PORT     STATE     SERVICE',
-          '443/tcp  open      https',
-          '22/tcp   filtered  ssh',
-          'note: demo output — real scans need real targets (and permission).',
-        )
-        break
-      case 'decrypt': {
-        const target = raw.trim().slice(name.length).trim()
-        if (!target) {
-          out.push('usage: decrypt <text>')
-        } else {
-          const rot13 = target.replace(/[a-z]/gi, (c) => {
-            const base = c >= 'a' && c <= 'z' ? 97 : 65
-            return String.fromCharCode(((c.charCodeAt(0) - base + 13) % 26) + base)
-          })
-          out.push(`decrypted: ${rot13}`, 'note: rot13 is not real encryption — do not use it for secrets.')
-        }
-        break
-      }
-      case 'ssh':
-        out.push('ssh: could not resolve host — the matrix is firewalled')
-        break
-      case 'trace':
-      case 'traceroute':
-        out.push(
-          'traceroute to icode4youu.github.io',
-          ' 1  localhost        0.3ms',
-          ' 2  github-pages     12.4ms',
-          ' 3  destination      18.7ms — you are already here',
-        )
-        break
-      case 'root':
-      case 'who':
-        out.push('nice try — guest shell only. the real admin is busy building.')
         break
       case 'hire':
         out.push('flattered. type "email" to grab my contact.')
