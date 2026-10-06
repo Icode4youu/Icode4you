@@ -6,7 +6,7 @@ endobj
 << /Type /Pages /Kids [3 0 R] /Count 1 >>
 endobj
 3 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 4 0 R /F2 5 0 R /F3 6 0 R /F4 7 0 R >> >> /Contents 8 0 R >>
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 4 0 R /F2 5 0 R /F3 6 0 R /F4 7 0 R >> >> /Contents 8 0 R /Annots [9 0 R 10 0 R 11 0 R 12 0 R 13 0 R] >>
 endobj
 4 0 obj
 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
@@ -21,61 +21,93 @@ endobj
 << /Type /Font /Subtype /Type1 /BaseFont /Courier-Bold >>
 endobj
 8 0 obj
-<< /Length 3472 >>
+<< /Length 4201 >>
 stream
 BT 0.080 0.090 0.110 rg /F2 24 Tf 56 736 Td (MARK DULAY DANILA) Tj ET
 BT 0.050 0.600 0.700 rg /F4 10 Tf 56 718 Td (Full-Stack Developer - Student-Facing Systems) Tj ET
-BT 0.350 0.380 0.420 rg /F3 8.5 Tf 56 704 Td (markdulaydanila@gmail.com   |   github.com/Icode4youu   |   icode4youu.github.io) Tj ET
+BT 0.350 0.380 0.420 rg /F3 8.5 Tf 56 704 Td (markdulaydanila@gmail.com) Tj ET
+BT 0.350 0.380 0.420 rg /F3 8.5 Tf 224 704 Td (|   github.com/Icode4youu) Tj ET
+BT 0.350 0.380 0.420 rg /F3 8.5 Tf 384 704 Td (|   icode4youu.github.io) Tj ET
 0.130 0.830 0.930 RG 1.5 w 56 694 m 556 694 l S
-BT 0.050 0.600 0.700 rg /F4 9.5 Tf 56 672 Td (SUMMARY) Tj ET
-BT 0.080 0.090 0.110 rg /F1 9.5 Tf 56 657 Td (I design student-centered platforms with real workflows: assessments, dashboards,) Tj ET
-BT 0.080 0.090 0.110 rg /F1 9.5 Tf 56 643 Td (realtime feeds, PWAs, and Android-ready builds. My work sits between system planning) Tj ET
-BT 0.080 0.090 0.110 rg /F1 9.5 Tf 56 629 Td (and product polish - mapping the data model, wiring the backend, building the) Tj ET
-BT 0.080 0.090 0.110 rg /F1 9.5 Tf 56 615 Td (interface, then packaging it for web and mobile use.) Tj ET
-BT 0.050 0.600 0.700 rg /F4 9.5 Tf 56 589 Td (PROJECTS) Tj ET
-BT 0.080 0.090 0.110 rg /F2 10.5 Tf 56 574 Td (CareerGuide - Career Guidance Platform) Tj ET
-BT 0.050 0.600 0.700 rg /F3 8.5 Tf 56 561 Td (careerguide1.onrender.com) Tj ET
-BT 0.050 0.600 0.700 rg /F2 9.5 Tf 64 545 Td (-) Tj ET
-BT 0.080 0.090 0.110 rg /F1 9.5 Tf 78 545 Td (Converts student skills assessments into course recommendations and progress tracking) Tj ET
-BT 0.050 0.600 0.700 rg /F2 9.5 Tf 64 531.5 Td (-) Tj ET
-BT 0.080 0.090 0.110 rg /F1 9.5 Tf 78 531.5 Td (Counselor workflows, portfolio evidence, 6 skill paths, 4 user roles) Tj ET
-BT 0.050 0.600 0.700 rg /F2 9.5 Tf 64 518.0 Td (-) Tj ET
-BT 0.080 0.090 0.110 rg /F1 9.5 Tf 78 518.0 Td (Stack: PHP, MySQL, Bootstrap, JavaScript, Android) Tj ET
-BT 0.080 0.090 0.110 rg /F2 10.5 Tf 56 498.5 Td (CampusSpill - Anonymous Realtime Student Network) Tj ET
-BT 0.050 0.600 0.700 rg /F3 8.5 Tf 56 485.5 Td (campusspill.onrender.com) Tj ET
-BT 0.050 0.600 0.700 rg /F2 9.5 Tf 64 469.5 Td (-) Tj ET
-BT 0.080 0.090 0.110 rg /F1 9.5 Tf 78 469.5 Td (Realtime posting with Supabase-backed interactions and anonymous posts) Tj ET
-BT 0.050 0.600 0.700 rg /F2 9.5 Tf 64 456.0 Td (-) Tj ET
-BT 0.080 0.090 0.110 rg /F1 9.5 Tf 78 456.0 Td (Installable PWA behavior and mobile-ready APK packaging) Tj ET
-BT 0.050 0.600 0.700 rg /F2 9.5 Tf 64 442.5 Td (-) Tj ET
-BT 0.080 0.090 0.110 rg /F1 9.5 Tf 78 442.5 Td (Stack: PHP, Supabase, JavaScript, PWA, APK) Tj ET
-BT 0.050 0.600 0.700 rg /F4 9.5 Tf 56 415.0 Td (CAPABILITIES) Tj ET
-BT 0.050 0.600 0.700 rg /F2 9.5 Tf 64 400.0 Td (-) Tj ET
-BT 0.080 0.090 0.110 rg /F1 9.5 Tf 78 400.0 Td (Product architecture - structuring users, roles, data, and workflows before screens) Tj ET
-BT 0.050 0.600 0.700 rg /F2 9.5 Tf 64 386.5 Td (-) Tj ET
-BT 0.080 0.090 0.110 rg /F1 9.5 Tf 78 386.5 Td (Full-stack execution - frontend interfaces to PHP backends, MySQL, and Supabase) Tj ET
-BT 0.050 0.600 0.700 rg /F2 9.5 Tf 64 373.0 Td (-) Tj ET
-BT 0.080 0.090 0.110 rg /F1 9.5 Tf 78 373.0 Td (Mobile-ready delivery - PWAs and Android wrappers that feel close to native) Tj ET
-BT 0.050 0.600 0.700 rg /F4 9.5 Tf 56 347.5 Td (STACK) Tj ET
-BT 0.080 0.090 0.110 rg /F3 9.5 Tf 56 332.5 Td (PHP  |  MySQL  |  Supabase  |  JavaScript  |  React  |  Tailwind CSS) Tj ET
-BT 0.080 0.090 0.110 rg /F3 9.5 Tf 56 318.5 Td (PWA  |  Bootstrap  |  Android packaging) Tj ET
-BT 0.050 0.600 0.700 rg /F4 9.5 Tf 56 292.5 Td (EDUCATION) Tj ET
-BT 0.350 0.380 0.420 rg /F1 9.5 Tf 56 277.5 Td ([School / Program / Expected graduation year]) Tj ET
+0.130 0.830 0.930 rg 56 672.5 6 6 re f
+BT 0.050 0.600 0.700 rg /F4 9.5 Tf 70 670 Td (SUMMARY) Tj ET
+BT 0.080 0.090 0.110 rg /F1 9.5 Tf 56 654 Td (I design student-centered platforms with real workflows: assessments, dashboards,) Tj ET
+BT 0.080 0.090 0.110 rg /F1 9.5 Tf 56 640 Td (realtime feeds, PWAs, and Android-ready builds. My work sits between system planning) Tj ET
+BT 0.080 0.090 0.110 rg /F1 9.5 Tf 56 626 Td (and product polish - mapping the data model, wiring the backend, building the) Tj ET
+BT 0.080 0.090 0.110 rg /F1 9.5 Tf 56 612 Td (interface, then packaging it for web and mobile use.) Tj ET
+BT 0.080 0.090 0.110 rg /F1 9.5 Tf 56 598 Td (Open to internships, junior developer roles, freelance builds, and student-facing) Tj ET
+BT 0.080 0.090 0.110 rg /F1 9.5 Tf 56 584 Td (product work.) Tj ET
+0.130 0.830 0.930 rg 56 560.5 6 6 re f
+BT 0.050 0.600 0.700 rg /F4 9.5 Tf 70 558 Td (PROJECTS) Tj ET
+BT 0.080 0.090 0.110 rg /F2 10.5 Tf 56 542 Td (CareerGuide - Career Guidance Platform) Tj ET
+BT 0.050 0.600 0.700 rg /F3 8.5 Tf 56 529 Td (careerguide1.onrender.com) Tj ET
+BT 0.050 0.600 0.700 rg /F2 9.5 Tf 64 513 Td (•) Tj ET
+BT 0.080 0.090 0.110 rg /F1 9.5 Tf 78 513 Td (Converts student skills assessments into course recommendations and progress tracking) Tj ET
+BT 0.050 0.600 0.700 rg /F2 9.5 Tf 64 499.5 Td (•) Tj ET
+BT 0.080 0.090 0.110 rg /F1 9.5 Tf 78 499.5 Td (Counselor workflows, portfolio evidence, 6 skill paths, 4 user roles) Tj ET
+BT 0.050 0.600 0.700 rg /F2 9.5 Tf 64 486.0 Td (•) Tj ET
+BT 0.080 0.090 0.110 rg /F1 9.5 Tf 78 486.0 Td (Stack: PHP, MySQL, Bootstrap, JavaScript, Android) Tj ET
+BT 0.080 0.090 0.110 rg /F2 10.5 Tf 56 466.5 Td (CampusSpill - Anonymous Realtime Student Network) Tj ET
+BT 0.050 0.600 0.700 rg /F3 8.5 Tf 56 453.5 Td (campusspill.onrender.com) Tj ET
+BT 0.050 0.600 0.700 rg /F2 9.5 Tf 64 437.5 Td (•) Tj ET
+BT 0.080 0.090 0.110 rg /F1 9.5 Tf 78 437.5 Td (Realtime posting with Supabase-backed interactions and anonymous posts) Tj ET
+BT 0.050 0.600 0.700 rg /F2 9.5 Tf 64 424.0 Td (•) Tj ET
+BT 0.080 0.090 0.110 rg /F1 9.5 Tf 78 424.0 Td (Installable PWA behavior and mobile-ready APK packaging) Tj ET
+BT 0.050 0.600 0.700 rg /F2 9.5 Tf 64 410.5 Td (•) Tj ET
+BT 0.080 0.090 0.110 rg /F1 9.5 Tf 78 410.5 Td (Stack: PHP, Supabase, JavaScript, PWA, APK) Tj ET
+0.130 0.830 0.930 rg 56 385.5 6 6 re f
+BT 0.050 0.600 0.700 rg /F4 9.5 Tf 70 383.0 Td (CAPABILITIES) Tj ET
+BT 0.050 0.600 0.700 rg /F2 9.5 Tf 64 367.0 Td (•) Tj ET
+BT 0.080 0.090 0.110 rg /F1 9.5 Tf 78 367.0 Td (Product architecture - structuring users, roles, data, and workflows before screens) Tj ET
+BT 0.050 0.600 0.700 rg /F2 9.5 Tf 64 353.5 Td (•) Tj ET
+BT 0.080 0.090 0.110 rg /F1 9.5 Tf 78 353.5 Td (Full-stack execution - frontend interfaces to PHP backends, MySQL, and Supabase) Tj ET
+BT 0.050 0.600 0.700 rg /F2 9.5 Tf 64 340.0 Td (•) Tj ET
+BT 0.080 0.090 0.110 rg /F1 9.5 Tf 78 340.0 Td (Mobile-ready delivery - PWAs and Android wrappers that feel close to native) Tj ET
+0.130 0.830 0.930 rg 56 317.0 6 6 re f
+BT 0.050 0.600 0.700 rg /F4 9.5 Tf 70 314.5 Td (STACK) Tj ET
+BT 0.080 0.090 0.110 rg /F3 9.5 Tf 56 298.5 Td (PHP  |  MySQL  |  Supabase  |  JavaScript  |  React  |  Tailwind CSS) Tj ET
+BT 0.080 0.090 0.110 rg /F3 9.5 Tf 56 284.5 Td (PWA  |  Bootstrap  |  Android packaging) Tj ET
+0.130 0.830 0.930 rg 56 263.0 6 6 re f
+BT 0.050 0.600 0.700 rg /F4 9.5 Tf 70 260.5 Td (TOOLS) Tj ET
+BT 0.080 0.090 0.110 rg /F3 9.5 Tf 56 244.5 Td (Git / GitHub  |  Vite  |  GitHub Actions + Pages  |  Render  |  Supabase) Tj ET
+0.130 0.830 0.930 rg 56 223.0 6 6 re f
+BT 0.050 0.600 0.700 rg /F4 9.5 Tf 70 220.5 Td (EDUCATION) Tj ET
+BT 0.350 0.380 0.420 rg /F1 9.5 Tf 56 204.5 Td ([School / Program / Expected graduation year]) Tj ET
 endstream
 endobj
+9 0 obj
+<< /Type /Annot /Subtype /Link /Rect [56 702 183.5 714.5] /Border [0 0 0] /A << /S /URI /URI (mailto:markdulaydanila@gmail.com) >> >>
+endobj
+10 0 obj
+<< /Type /Annot /Subtype /Link /Rect [224 702 351.5 714.5] /Border [0 0 0] /A << /S /URI /URI (https://github.com/Icode4youu) >> >>
+endobj
+11 0 obj
+<< /Type /Annot /Subtype /Link /Rect [384 702 506.4 714.5] /Border [0 0 0] /A << /S /URI /URI (https://icode4youu.github.io/) >> >>
+endobj
+12 0 obj
+<< /Type /Annot /Subtype /Link /Rect [56 527 183.5 539.5] /Border [0 0 0] /A << /S /URI /URI (https://careerguide1.onrender.com/) >> >>
+endobj
+13 0 obj
+<< /Type /Annot /Subtype /Link /Rect [56 451.5 178.39999999999998 464.0] /Border [0 0 0] /A << /S /URI /URI (https://campusspill.onrender.com/) >> >>
+endobj
 xref
-0 9
+0 14
 0000000000 65535 f 
 0000000009 00000 n 
 0000000058 00000 n 
 0000000115 00000 n 
-0000000271 00000 n 
-0000000341 00000 n 
-0000000416 00000 n 
-0000000484 00000 n 
-0000000557 00000 n 
+0000000315 00000 n 
+0000000385 00000 n 
+0000000460 00000 n 
+0000000528 00000 n 
+0000000601 00000 n 
+0000004854 00000 n 
+0000005003 00000 n 
+0000005151 00000 n 
+0000005299 00000 n 
+0000005451 00000 n 
 trailer
-<< /Size 9 /Root 1 0 R >>
+<< /Size 14 /Root 1 0 R >>
 startxref
-4081
+5617
 %%EOF
