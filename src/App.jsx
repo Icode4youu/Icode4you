@@ -569,6 +569,27 @@ function ModuleUniverse() {
 
 const TERMINAL_HELP = 'commands: whoami | projects | stack | socials | email | resume | open cg/cs | ls | ping | date | clear | exit — plus a few secrets…'
 
+const KNOWN_COMMANDS = [
+  'help', 'whoami', 'projects', 'stack', 'socials', 'email', 'resume', 'open',
+  'ls', 'dir', 'ping', 'date', 'sudo', 'hire', 'matrix', 'hello', 'hi', 'kamusta',
+  '42', 'clear', 'exit', 'close',
+]
+
+function editDistance(a, b) {
+  const dp = Array.from({ length: a.length + 1 }, (_, i) => [i, ...Array(b.length).fill(0)])
+  for (let j = 1; j <= b.length; j += 1) dp[0][j] = j
+  for (let i = 1; i <= a.length; i += 1) {
+    for (let j = 1; j <= b.length; j += 1) {
+      dp[i][j] = Math.min(
+        dp[i - 1][j] + 1,
+        dp[i][j - 1] + 1,
+        dp[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1),
+      )
+    }
+  }
+  return dp[a.length][b.length]
+}
+
 const BOOT_LINES = [
   'MD://BIOS v2026.1 — memory check ............ ok',
   'mounting /portfolio ........................ ok',
@@ -810,8 +831,10 @@ function TerminalOverlay({ open, onClose, onMatrix }) {
       case 'close':
         onClose()
         return
-      default:
-        out.push(`command not found: ${name} — type "help"`)
+      default: {
+        const suggestion = KNOWN_COMMANDS.find((known) => editDistance(name, known) <= 2)
+        out.push(`command not found: ${name}${suggestion ? ` — did you mean "${suggestion}"?` : ' — type "help"'}`)
+      }
     }
 
     setLines((prev) => [...prev, `mark@danila:~$ ${raw}`, ...out])
