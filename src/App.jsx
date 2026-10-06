@@ -370,6 +370,23 @@ function DownloadIcon({ className = 'h-4 w-4' }) {
   )
 }
 
+function CopyIcon({ className = 'h-4 w-4' }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <rect x="8" y="8" width="12" height="12" rx="2" stroke="currentColor" strokeWidth="1.8" />
+      <path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+    </svg>
+  )
+}
+
+function CheckIcon({ className = 'h-4 w-4' }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M5 12l5 5L20 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  )
+}
+
 function FacebookIcon({ className = 'h-4 w-4' }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -759,10 +776,21 @@ export default function App() {
               Available for internships, junior developer roles, freelance builds, and student-facing product work.
             </p>
             <div className="contact-actions">
-              <button type="button" onClick={copyEmail} className="primary-command email-command" title="Click to copy email">
-                <MailIcon />
-                {copied ? 'Copied to clipboard' : email}
-              </button>
+              <div className="email-group">
+                <a href={`mailto:${email}`} className="primary-command email-command">
+                  <MailIcon />
+                  {email}
+                </a>
+                <button
+                  type="button"
+                  onClick={copyEmail}
+                  className={`copy-chip ${copied ? 'is-copied' : ''}`}
+                  title="Copy email"
+                  aria-label="Copy email address"
+                >
+                  {copied ? <CheckIcon /> : <CopyIcon />}
+                </button>
+              </div>
               <a href="https://github.com/Icode4youu" target="_blank" rel="noreferrer" className="secondary-command">
                 <GithubIcon />
                 GitHub / Icode4youu
