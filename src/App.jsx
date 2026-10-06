@@ -396,14 +396,6 @@ function InstagramIcon({ className = 'h-4 w-4' }) {
   )
 }
 
-function XIcon({ className = 'h-4 w-4' }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3l-4.9-6.4L6.4 22H3.3l7.3-8.3L1.2 2h6.4l4.5 5.9L18.9 2Zm-1.1 18h1.7L7.7 3.8H5.9L17.8 20Z" />
-    </svg>
-  )
-}
-
 const socials = [
   { name: 'GitHub', url: 'https://github.com/Icode4youu', Icon: GithubIcon },
   { name: 'LinkedIn', url: 'https://www.linkedin.com/in/mark-dulay-danila-841870441/', Icon: LinkedinIcon },
