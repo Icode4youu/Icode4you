@@ -1709,3 +1709,199 @@
     transform: none;
   }
 }
+
+.section-rail a.is-active {
+  color: white;
+}
+
+.section-rail a.is-active span {
+  background: #22d3ee;
+  box-shadow: 0 0 18px #22d3ee;
+}
+
+.stats-strip {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem 1rem;
+  width: min(76rem, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 3rem 0;
+  border-block: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.stat-cell {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.stat-cell strong {
+  color: white;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.stat-cell span {
+  color: #64748b;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+}
+
+.stack-section,
+.process-section {
+  width: min(76rem, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 7rem 0;
+}
+
+.stack-head h2 {
+  max-width: 42rem;
+  margin-top: 1.2rem;
+  color: white;
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  font-weight: 850;
+  letter-spacing: -0.055em;
+  line-height: 0.95;
+}
+
+.stack-grid {
+  display: grid;
+  gap: 1rem;
+  margin-top: 3rem;
+}
+
+.stack-card {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1.5rem;
+  background: rgba(255, 255, 255, 0.035);
+  padding: 1.4rem;
+  transition: transform 220ms ease, border-color 220ms ease, background 220ms ease;
+}
+
+.stack-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(240, 171, 252, 0.3);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.stack-card > span {
+  color: #f0abfc;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 0.3em;
+}
+
+.stack-card h3 {
+  margin-top: 1.4rem;
+  color: white;
+  font-size: 1.3rem;
+  font-weight: 800;
+}
+
+.stack-card ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.2rem;
+  padding: 0;
+  list-style: none;
+}
+
+.stack-card li {
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  padding: 0.45rem 0.85rem;
+  color: #cbd5e1;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  transition: border-color 200ms ease, color 200ms ease;
+}
+
+.stack-card:hover li {
+  border-color: rgba(240, 171, 252, 0.35);
+  color: white;
+}
+
+.process-track {
+  display: grid;
+  gap: 2rem;
+  margin-top: 2.8rem;
+}
+
+.process-step {
+  border-top: 2px solid rgba(103, 232, 249, 0.35);
+  padding-top: 1.3rem;
+}
+
+.process-step span {
+  color: #67e8f9;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 0.3em;
+}
+
+.process-step h3 {
+  margin-top: 0.9rem;
+  color: white;
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+
+.process-step p {
+  margin-top: 0.7rem;
+  color: #94a3b8;
+  line-height: 1.8;
+}
+
+button.ghost-link {
+  background: transparent;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.site-footer nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+}
+
+.site-footer nav a,
+.site-footer .footer-top {
+  color: #94a3b8;
+  transition: color 200ms ease;
+}
+
+.site-footer nav a:hover,
+.site-footer .footer-top:hover {
+  color: white;
+}
+
+@media (min-width: 768px) {
+  .stats-strip {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .stack-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .process-track {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .stack-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

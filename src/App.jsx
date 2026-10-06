@@ -37,6 +37,29 @@ const projects = [
 
 const stackFaces = ['React', 'Tailwind', 'PHP', 'MySQL', 'Supabase', 'PWA']
 
+const SECTION_IDS = ['top', 'modules', 'stack', 'profile', 'process', 'contact']
+
+const systemStats = [
+  { value: '02', label: 'deployed systems' },
+  { value: '06', label: 'skill paths modeled' },
+  { value: '04', label: 'user roles wired' },
+  { value: '2/2', label: 'mobile-ready builds' },
+]
+
+const stackGroups = [
+  { id: 'S1', title: 'Languages', items: ['PHP', 'JavaScript', 'SQL'] },
+  { id: 'S2', title: 'Backend & data', items: ['MySQL', 'Supabase', 'REST APIs', 'Auth & roles'] },
+  { id: 'S3', title: 'Frontend', items: ['React', 'Tailwind CSS', 'Bootstrap', 'Vite'] },
+  { id: 'S4', title: 'Delivery', items: ['PWA builds', 'Android packaging', 'Render', 'GitHub Pages'] },
+]
+
+const processSteps = [
+  { id: '01', title: 'Map the workflow', text: 'I study the users, roles, and real processes a system needs to support before writing code.' },
+  { id: '02', title: 'Model the data', text: 'I design the tables, relationships, and permissions so the system has a solid backbone.' },
+  { id: '03', title: 'Build the interface', text: 'I turn the workflows into screens with real states — loading, empty, error — not placeholders.' },
+  { id: '04', title: 'Ship and package', text: 'I deploy for the web, package for mobile, and keep the system maintainable.' },
+]
+
 const capabilities = [
   {
     id: 'A',
@@ -157,6 +180,29 @@ function useReveal() {
     document.querySelectorAll('[data-reveal]').forEach((element) => observer.observe(element))
     return () => observer.disconnect()
   }, [])
+}
+
+function useSectionSpy() {
+  const [active, setActive] = useState(SECTION_IDS[0])
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActive(entry.target.id)
+        })
+      },
+      { rootMargin: '-40% 0px -55% 0px' },
+    )
+
+    SECTION_IDS.forEach((id) => {
+      const element = document.getElementById(id)
+      if (element) observer.observe(element)
+    })
+    return () => observer.disconnect()
+  }, [])
+
+  return active
 }
 
 function ParticleField() {
@@ -324,6 +370,15 @@ function DownloadIcon({ className = 'h-4 w-4' }) {
   )
 }
 
+function CopyIcon({ className = 'h-4 w-4' }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <rect x="8" y="8" width="12" height="12" rx="2" stroke="currentColor" strokeWidth="1.8" />
+      <path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+    </svg>
+  )
+}
+
 function GlitchText({ text, className = '' }) {
   return (
     <span className={`glitch ${className}`} data-text={text}>
@@ -475,7 +530,19 @@ export default function App() {
   const glowRef = useCursorGlow()
   const telemetryRef = useMouseTelemetry()
   const progress = useScrollProgress()
+  const activeSection = useSectionSpy()
+  const [copied, setCopied] = useState(false)
   useReveal()
+
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(email)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 1600)
+    } catch {
+      window.location.href = `mailto:${email}`
+    }
+  }
 
   return (
     <div id="top" className="min-h-screen bg-[#030309] text-slate-300">
@@ -495,6 +562,7 @@ export default function App() {
         </a>
         <nav>
           <a href="#modules">Modules</a>
+          <a href="#stack">Stack</a>
           <a href="#profile">Profile</a>
           <a href="#contact">Contact</a>
         </nav>
@@ -504,10 +572,12 @@ export default function App() {
       </header>
 
       <aside className="section-rail" aria-label="Section navigation">
-        <a href="#top"><span />Boot</a>
-        <a href="#modules"><span />Modules</a>
-        <a href="#profile"><span />Profile</a>
-        <a href="#contact"><span />Signal</a>
+        <a href="#top" className={activeSection === 'top' ? 'is-active' : ''}><span />Boot</a>
+        <a href="#modules" className={activeSection === 'modules' ? 'is-active' : ''}><span />Modules</a>
+        <a href="#stack" className={activeSection === 'stack' ? 'is-active' : ''}><span />Stack</a>
+        <a href="#profile" className={activeSection === 'profile' ? 'is-active' : ''}><span />Profile</a>
+        <a href="#process" className={activeSection === 'process' ? 'is-active' : ''}><span />Process</a>
+        <a href="#contact" className={activeSection === 'contact' ? 'is-active' : ''}><span />Signal</a>
       </aside>
 
       <main className="relative z-10">
@@ -582,10 +652,39 @@ export default function App() {
 
         <ModuleUniverse />
 
+        <section className="stats-strip" aria-label="System numbers">
+          {systemStats.map((stat, index) => (
+            <div key={stat.label} data-reveal style={{ '--delay': `${index * 90}ms` }} className="stat-cell">
+              <strong>{stat.value}</strong>
+              <span>{stat.label}</span>
+            </div>
+          ))}
+        </section>
+
+        <section id="stack" className="stack-section">
+          <div data-reveal className="stack-head">
+            <p className="section-kicker">02 / stack matrix</p>
+            <h2>The tools behind the systems.</h2>
+          </div>
+          <div className="stack-grid">
+            {stackGroups.map((group, index) => (
+              <div key={group.id} data-reveal style={{ '--delay': `${index * 100}ms` }} className="stack-card">
+                <span>{group.id}</span>
+                <h3>{group.title}</h3>
+                <ul>
+                  {group.items.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </section>
+
         <section id="profile" className="profile-section">
-          <div data-reveal className="profile-number">02</div>
+          <div data-reveal className="profile-number">03</div>
           <div data-reveal className="profile-copy">
-            <p className="section-kicker">Profile</p>
+            <p className="section-kicker">03 / Profile</p>
             <h2>I build software for the places students actually live.</h2>
             <p>
               I’m Mark Dulay Danila. My work sits between system planning and product polish: mapping the data model, wiring the backend, building the interface, then packaging it for web and mobile use.
@@ -605,9 +704,22 @@ export default function App() {
           </div>
         </section>
 
+        <section id="process" className="process-section">
+          <p data-reveal className="section-kicker">04 / build process</p>
+          <div className="process-track">
+            {processSteps.map((step, index) => (
+              <div key={step.id} data-reveal style={{ '--delay': `${index * 110}ms` }} className="process-step">
+                <span>{step.id}</span>
+                <h3>{step.title}</h3>
+                <p>{step.text}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
         <section id="contact" className="contact-section">
           <div data-reveal className="contact-shell">
-            <p className="section-kicker">Signal</p>
+            <p className="section-kicker">05 / Signal</p>
             <h2>
               Open a channel.
               <br />
@@ -629,6 +741,10 @@ export default function App() {
                 <DownloadIcon />
                 Download CV
               </a>
+              <button type="button" onClick={copyEmail} className="ghost-link">
+                <CopyIcon />
+                {copied ? 'Copied' : 'Copy email'}
+              </button>
             </div>
           </div>
         </section>
@@ -636,7 +752,14 @@ export default function App() {
 
       <footer className="site-footer">
         <span>MD://2026</span>
+        <nav aria-label="Footer">
+          <a href="#modules">Modules</a>
+          <a href="#stack">Stack</a>
+          <a href="#profile">Profile</a>
+          <a href="#contact">Signal</a>
+        </nav>
         <span>React / Tailwind / Interactive systems</span>
+        <a href="#top" className="footer-top">Back to top</a>
       </footer>
     </div>
   )
