@@ -370,14 +370,43 @@ function DownloadIcon({ className = 'h-4 w-4' }) {
   )
 }
 
-function CopyIcon({ className = 'h-4 w-4' }) {
+function FacebookIcon({ className = 'h-4 w-4' }) {
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <rect x="8" y="8" width="12" height="12" rx="2" stroke="currentColor" strokeWidth="1.8" />
-      <path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3Z" />
     </svg>
   )
 }
+
+function LinkedinIcon({ className = 'h-4 w-4' }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4V8h4v1.5A6 6 0 0 1 16 8ZM2 9h4v12H2V9Zm2-7a2 2 0 1 1 0 4 2 2 0 0 1 0-4Z" />
+    </svg>
+  )
+}
+
+function InstagramIcon({ className = 'h-4 w-4' }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <rect x="2.5" y="2.5" width="19" height="19" rx="5" stroke="currentColor" strokeWidth="1.8" />
+      <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.8" />
+      <circle cx="17.4" cy="6.6" r="1.2" fill="currentColor" />
+    </svg>
+  )
+}
+
+function XIcon({ className = 'h-4 w-4' }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3l-4.9-6.4L6.4 22H3.3l7.3-8.3L1.2 2h6.4l4.5 5.9L18.9 2Zm-1.1 18h1.7L7.7 3.8H5.9L17.8 20Z" />
+    </svg>
+  )
+}
+
+const socials = [
+  { name: 'GitHub', url: 'https://github.com/Icode4youu', Icon: GithubIcon },
+]
 
 function GlitchText({ text, className = '' }) {
   return (
@@ -729,10 +758,10 @@ export default function App() {
               Available for internships, junior developer roles, freelance builds, and student-facing product work.
             </p>
             <div className="contact-actions">
-              <a href={`mailto:${email}`} className="primary-command">
+              <button type="button" onClick={copyEmail} className="primary-command email-command" title="Click to copy email">
                 <MailIcon />
-                {email}
-              </a>
+                {copied ? 'Copied to clipboard' : email}
+              </button>
               <a href="https://github.com/Icode4youu" target="_blank" rel="noreferrer" className="secondary-command">
                 <GithubIcon />
                 GitHub / Icode4youu
@@ -741,10 +770,14 @@ export default function App() {
                 <DownloadIcon />
                 Download CV
               </a>
-              <button type="button" onClick={copyEmail} className="ghost-link">
-                <CopyIcon />
-                {copied ? 'Copied' : 'Copy email'}
-              </button>
+            </div>
+            <div className="social-row" aria-label="Social links">
+              {socials.map(({ name, url, Icon }) => (
+                <a key={name} href={url} target="_blank" rel="noreferrer" className="social-chip">
+                  <Icon />
+                  {name}
+                </a>
+              ))}
             </div>
           </div>
         </section>

@@ -1905,3 +1905,42 @@ button.ghost-link {
     grid-template-columns: repeat(4, 1fr);
   }
 }
+
+button.primary-command {
+  border: 0;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.email-command {
+  min-width: 16rem;
+}
+
+.social-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-top: 1.6rem;
+}
+
+.social-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  padding: 0.7rem 1.05rem;
+  color: #cbd5e1;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  transition: transform 200ms ease, border-color 200ms ease, color 200ms ease;
+}
+
+.social-chip:hover {
+  transform: translateY(-3px);
+  border-color: rgba(103, 232, 249, 0.45);
+  color: white;
+}
