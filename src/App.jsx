@@ -9,8 +9,9 @@ const projects = [
     name: 'CareerGuide',
     label: 'Guidance engine',
     site: 'https://careerguide1.onrender.com/',
+    repo: 'https://github.com/Icode4youu/CareerGuide',
     tone: 'cyan',
-    image: 'careerguide.png',
+    image: 'careerguide.webp',
     imageAlt: 'CareerGuide mobile landing page screenshot',
     description:
       'A career guidance platform that converts student skills assessments into course recommendations, progress tracking, counselor workflows, and portfolio evidence.',
@@ -23,8 +24,9 @@ const projects = [
     name: 'CampusSpill',
     label: 'Realtime wall',
     site: 'https://campusspill.onrender.com/',
+    repo: 'https://github.com/Icode4youu/CampusSpill',
     tone: 'fuchsia',
-    image: 'campusspill.png',
+    image: 'campusspill.webp',
     imageAlt: 'CampusSpill mobile feed screenshot',
     description:
       'An anonymous student network with realtime posting, Supabase-backed interactions, installable PWA behavior, and mobile-ready APK packaging.',
@@ -308,6 +310,20 @@ function MailIcon({ className = 'h-4 w-4' }) {
   )
 }
 
+function DownloadIcon({ className = 'h-4 w-4' }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path
+        d="M12 4v11m0 0 4-4m-4 4-4-4M5 20h14"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  )
+}
+
 function GlitchText({ text, className = '' }) {
   return (
     <span className={`glitch ${className}`} data-text={text}>
@@ -382,6 +398,10 @@ function UniversePanel({ project, active }) {
           <a href={project.site} target="_blank" rel="noreferrer" className="launch-link">
             Visit site
             <ArrowIcon />
+          </a>
+          <a href={project.repo} target="_blank" rel="noreferrer" className="ghost-link">
+            <GithubIcon />
+            View code
           </a>
           <a href={`mailto:${email}?subject=${encodeURIComponent(`Question about ${project.name}`)}`} className="ghost-link">
             Ask about it
@@ -514,6 +534,10 @@ export default function App() {
                 <GithubIcon />
                 Icode4youu
               </a>
+              <a href={`${import.meta.env.BASE_URL}resume.pdf`} download className="secondary-command">
+                <DownloadIcon />
+                Download CV
+              </a>
             </div>
           </div>
 
@@ -600,6 +624,10 @@ export default function App() {
               <a href="https://github.com/Icode4youu" target="_blank" rel="noreferrer" className="secondary-command">
                 <GithubIcon />
                 GitHub / Icode4youu
+              </a>
+              <a href={`${import.meta.env.BASE_URL}resume.pdf`} download className="secondary-command">
+                <DownloadIcon />
+                Download CV
               </a>
             </div>
           </div>
