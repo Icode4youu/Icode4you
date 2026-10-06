@@ -406,6 +406,9 @@ function XIcon({ className = 'h-4 w-4' }) {
 
 const socials = [
   { name: 'GitHub', url: 'https://github.com/Icode4youu', Icon: GithubIcon },
+  { name: 'LinkedIn', url: 'https://www.linkedin.com/in/mark-dulay-danila-841870441/', Icon: LinkedinIcon },
+  { name: 'Facebook', url: 'https://www.facebook.com/mrkdlydnl', Icon: FacebookIcon },
+  { name: 'Instagram', url: 'https://www.instagram.com/mrkdlydnl4/', Icon: InstagramIcon },
 ]
 
 function GlitchText({ text, className = '' }) {
@@ -711,7 +714,13 @@ export default function App() {
         </section>
 
         <section id="profile" className="profile-section">
-          <div data-reveal className="profile-number">03</div>
+          <div className="profile-side">
+            <div data-reveal className="profile-number">03</div>
+            <figure data-reveal style={{ '--delay': '140ms' }} className="profile-photo">
+              <img src={`${import.meta.env.BASE_URL}portrait.webp`} alt="Mark Dulay Danila" />
+              <figcaption className="photo-tag">operator.img</figcaption>
+            </figure>
+          </div>
           <div data-reveal className="profile-copy">
             <p className="section-kicker">03 / Profile</p>
             <h2>I build software for the places students actually live.</h2>
